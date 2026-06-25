@@ -1,15 +1,17 @@
 package com.gatepass.guardhouse.user.model;
 
 import com.gatepass.guardhouse.common.model.BaseDocument;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @Document(collection = "users")
 public class User extends BaseDocument {
 
