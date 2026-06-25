@@ -1,4 +1,3 @@
-HELP.md
 .gradle
 .doc
 build/
@@ -36,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+.env
+application-local.properties
