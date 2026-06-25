@@ -1,5 +1,6 @@
 package com.gatepass.guardhouse.auth.service;
 
+import com.gatepass.guardhouse.auth.security.GuardhouseUserDetails;
 import com.gatepass.guardhouse.user.model.User;
 import com.gatepass.guardhouse.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +17,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Authentication failed"));
 
-        return org.springframework.security.core.userdetails.User
-                .withUsername(user.getEmail())
-                .password(user.getPassword())
-                .roles(user.getUserRole().name())
-                .build();
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Authentication failed"));
+        return new GuardhouseUserDetails(user);
+
     }
 }

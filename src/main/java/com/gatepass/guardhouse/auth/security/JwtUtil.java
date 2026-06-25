@@ -24,7 +24,7 @@ public class JwtUtil {
         this.expirationMs = expirationMs;
     }
 
-    public String generateToken(String email, String role) {
+    public String generateToken(String email, String role, String userId) {
 
         Date now = new Date();
         Date expiry = new Date(now.getTime() + expirationMs);
@@ -32,6 +32,7 @@ public class JwtUtil {
         return Jwts.builder()
                 .subject(email)
                 .claim("role", role)
+                .claim("userId", userId)
                 .issuedAt(now)
                 .expiration(expiry)
                 .signWith(secretKey)
@@ -39,7 +40,11 @@ public class JwtUtil {
     }
 
     public String extractEmail(String token) {
-        return extractAllClaims(token).get("role", String.class);
+        return extractAllClaims(token).getSubject();
+    }
+
+    public String extractUserId(String token) {
+        return extractAllClaims(token).get("userId", String.class);
     }
 
     public boolean isTokenValid(String token) {
