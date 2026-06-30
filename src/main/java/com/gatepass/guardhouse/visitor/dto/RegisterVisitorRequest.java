@@ -1,7 +1,7 @@
 package com.gatepass.guardhouse.visitor.dto;
 
 import com.gatepass.guardhouse.visitor.model.VisitorType;
-import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -32,6 +32,6 @@ public class RegisterVisitorRequest {
     private String purpose;
 
     @NotNull
-    @Future
+    @FutureOrPresent
     private LocalDate expectedDate;
 }

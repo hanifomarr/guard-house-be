@@ -33,6 +33,7 @@ public class Visitor extends BaseDocument {
 
     private LocalDate expectedDate;
 
+    @Builder.Default
     private VisitorStatus status = VisitorStatus.PENDING;
 
     private String qrToken;

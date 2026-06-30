@@ -7,7 +7,9 @@ import com.gatepass.guardhouse.visitor.dto.VisitorResponse;
 import com.gatepass.guardhouse.visitor.service.VisitorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -44,6 +46,19 @@ public class VisitorController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(ApiResponse.success("Visitor retrieved successfully", response));
+    }
+
+    @PreAuthorize("hasAnyRole('RESIDENT', 'GUARD', 'ADMIN')")
+    @GetMapping("/{id}/qr")
+    public ResponseEntity<byte[]> getVisitorQrCode(
+            @PathVariable("id") String id) {
+
+        byte[] visitorQrCode = visitorService.getVisitorQrCode(id);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.IMAGE_PNG_VALUE)
+                .body(visitorQrCode);
     }
 
     @PreAuthorize("hasRole('RESIDENT')")
