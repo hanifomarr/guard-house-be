@@ -72,6 +72,4 @@ public class VisitorController {
                 .status(HttpStatus.OK)
                 .body(ApiResponse.success("Visitors retrieved successfully", visitors));
     }
-
-
 }

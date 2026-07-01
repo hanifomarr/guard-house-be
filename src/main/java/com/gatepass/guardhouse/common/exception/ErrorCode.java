@@ -22,6 +22,11 @@ public enum ErrorCode {
     VISITOR_QR_EXPIRED("VIS_003", "Visitor QR code has expired", HttpStatus.BAD_REQUEST),
     VISITOR_ALREADY_CANCELLED("VIS_004", "Visitor has already been cancelled", HttpStatus.BAD_REQUEST),
     VISITOR_NOT_APPROVED("VIS_005", "Visitor is not approved for entry", HttpStatus.FORBIDDEN),
+    VISITOR_ALREADY_EXITED("VIS_006", "Visitor has already exited", HttpStatus.CONFLICT),
+
+    // Visit Log errors
+    VISIT_LOG_NOT_FOUND("LOG_001", "Visit log not found", HttpStatus.NOT_FOUND),
+    VISIT_ALREADY_EXITED("LOG_002", "Visitor has already exited", HttpStatus.CONFLICT),
 
     // General
     VALIDATION_FAILED("GEN_001", "Validation failed", HttpStatus.BAD_REQUEST),
